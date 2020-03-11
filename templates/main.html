@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="author" content="Ankit Singh">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="static/main.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+    <div class="nav">
+        <ul>
+            <div class="nav-left">
+                <li id="menu-icon"><a href="#" onclick="showSideNav()"
+                        style="padding-left: 24px; padding-right: 0px; color: rgba(0, 0, 0, 0.6);"><i
+                            class="fas fa-bars fa-lg"></i></a></li>
+                <li id="logo"><a href="{{url_for('index')}}" style="font-size: 22px;"><b id="google">Google</b> Keep</a>
+                </li>
+                <li id="search"><input class="search" value="" type="text" placeholder="Search your note"
+                        onblur="this.value='';removeSearch()" onfocus="showSearch()"></input></li>
+                <li id="close-search"><a href="#" onclick="clearSearch()"><i class="fas fa-times fa-lg"></i></a></li>
+            </div>
+            <div class="nav-right">
+                <li id="search-icon"><a href="#" onclick="showSearch()"><i class="fas fa-search fa-lg"></i></a></li>
+                <li><a href="#" onClick="window.location.reload();"><i class="fas fa-redo-alt fa-lg"></i></a></li>
+                <li><a href="#"><i class="fas fa-bell fa-lg"></i></a></li>
+                <li><a href="#"><i class="fas fa-user fa-lg" style="margin-bottom: 50px;"></i></a></li>
+            </div>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="side-nav" onblur="alert()">
+            <ul>
+                <li><a href="#" style="font-size: 22px; padding-left: 0px;"><b>Google</b> Keep</a></li>
+                <li><i class="fas fa-sticky-note fa-1x"></i><a href="#">Notes</a></li>
+            </ul>
+        </div>
+        <div class="cards-container">
+            <div id="notes" style="margin-left: 150px;">
+                <button onclick="textnote()">Text Note</button>
+                <button onclick="listnote()">List Note</button>
+                <button onclick="linknote()">link note</button>
+            </div>
+        </div>
+        <div>
+            <input class="hide" name="textInput" type="text" id="textInput" placeholder="Type your Note">
+            <input type="submit" class="hide" id="textbutton">
+        </div>
+        <div class="listmenu">
+            <div id="myDIV" class="header">
+                <h3>My To Do List</h3>
+                <input type="text" id="myInput" name="listInput" placeholder="Title..." required>
+                <span onclick="newElement()" class="addBtn">Add</span>
+            </div>
+            <div class="myList">
+                <ul id="myUL">
+                </ul>
+            </div>
+        </div>
+
+        <div class="linknote">
+            <input type="text" id="linktitle" placeholder="Title" required>
+            <input type="url" id="linkInput" placeholder="Type your link" required>
+            <input type="submit" id="linkbutton">
+        </div>
+
+        <div class=" flex-container">
+            {% for text in todo %}
+            <div>
+                <b>{{text.text}}</b>
+            </div>
+            {% endfor %}
+            {% for text in todolist %}
+            <div>
+                <b>{{text.text}}</b>
+            </div>
+            {% endfor %}
+            {% for text in todolink %}
+            <div>
+                <a href='https://{{text.link}}' target="_blank"
+                    style="text-decoration: underline; margin-left: 40px;">{{text.title}}</a></input>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        $("document").ready(function () {
+            $("#textbutton").click(function () {
+                var message = $("#textInput").val();
+                console.log(message);
+                $.ajax({
+                    url: "/addtextnote",
+                    type: "POST",
+                    data: {
+                        'data': message //  to the GET parameters
+                    },
+                    success: function (html) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+
+        $("document").ready(function () {
+            $("#linkbutton").click(function () {
+                var link = $("#linkInput").val();
+                var title = $("#linktitle").val();
+                $.ajax({
+                    url: "/addlinknote",
+                    type: "POST",
+                    data: {
+                        'url': link,
+                        'title': title
+                    },
+                    success: function (html) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

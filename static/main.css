@@ -1,0 +1,342 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'Product Sans', Arial, sans-serif;
+}
+
+.nav {
+  background-color: #fb0;
+  height: 64px;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  padding: 0;
+}
+
+.container {
+  background-color: #e8e8e8;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.nav ul {
+  list-style-type: none;
+  height: 64px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav li {
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.nav li>a {
+  color: black;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-decoration: none;
+  line-height: 100%;
+  top: 32%;
+  position: relative;
+
+
+
+}
+
+.nav-left {
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+
+.nav-right {
+  position: absolute;
+  right: 0;
+  display: inline-block;
+  height: 100%;
+  width: 180px;
+}
+
+.nav-right li>a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.cards-container {
+  padding-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 600px;
+}
+
+.card {
+  background-color: #fff;
+  padding: 0 10px 0 10px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card p {
+  margin: -5px 0;
+}
+
+.card-edit {
+  width: 100%;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  visibility: hidden;
+}
+
+.card-edit a>svg {
+  padding-right: 20px;
+}
+
+.card-done {
+  color: black;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  position: relative;
+  top: -9px;
+  left: -18px;
+  color: rgba(0, 0, 0, 0.6);
+  visibility: hidden;
+}
+
+.search {
+  /*margin-left: 25px;
+  padding-left: 20px;*/
+  font-size: 15px;
+  height: 42px;
+  top: 12%;
+  position: relative;
+  /*width: 100%;*/
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.0);
+  border-radius: 5px;
+}
+
+.search:focus {
+  background-color: white;
+}
+
+.side-nav {
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
+  height: 100%;
+  width: 250px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  display: none;
+}
+
+.side-nav ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.side-nav li>a {
+  text-decoration: none;
+  color: black;
+  padding-left: 10px;
+}
+
+.side-nav li {
+  padding-bottom: 30px;
+}
+
+#close-search {
+  display: none;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+#logo {
+  margin-left: 24px;
+}
+
+@media only screen and (min-width: 768px) {
+  #search {
+    width: 40%;
+  }
+
+  .search {
+    margin-left: 25px;
+    padding-left: 20px;
+    font-size: 15px;
+    height: 42px;
+    top: 12%;
+    position: relative;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.0);
+    border-radius: 5px;
+  }
+
+  #search-icon {
+    display: none;
+  }
+
+  #search {
+    display: inline-block;
+  }
+
+  .flex-container {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+  }
+
+  .flex-container>div {
+    background-color: teal;
+    margin: 10px;
+    word-wrap: break-word;
+    width: 175px;
+    border: 1px solid #000000;
+    word-break: keep-all;
+    padding: 40px;
+    font-size: 30px;
+    color: black;
+  }
+
+
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+  margin-left: 150px;
+  margin-top: 100px;
+  text-align: center;
+  width: 300px;
+  height: 50px;
+  border: 1px solid red;
+}
+
+.showbutton {
+  margin-top: 5px;
+  margin-left: 150px;
+}
+
+.listmenu {
+  box-sizing: border-box;
+  visibility: hidden;
+}
+
+.linknote {
+  display: block;
+  visibility: hidden;
+}
+
+/* Style the list items */
+.myList>ul>li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 0px 12px 40px;
+  list-style-type: none;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+/*.myUL > ul li:nth-child(odd) {
+  background: #f9f9f9;
+}*/
+
+/* Darker background-color on hover */
+.myList>ul>li:hover {
+  background: #ddd;
+}
+
+/* When clicked on, add a background color and strike out text */
+.checked {
+  background: #888;
+  color: #222;
+  text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #568;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+/* Style the close button */
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Style the header */
+.header {
+  padding: 30px 40px;
+  text-align: left;
+}
+
+/* Clear floats after the header */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.header>h3 {
+  margin-top: 30px;
+}
+
+/* Style the input */
+.header>input {
+  margin-top: 0px;
+  border: none;
+  border-radius: 0;
+  width: 25%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+/* Style the "Add" button */
+.header>.addBtn {
+  padding: 10px;
+  width: 15%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.header>.addBtn:hover {
+  background-color: #bbb;
+}
