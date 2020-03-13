@@ -82,6 +82,8 @@ function textnote() {
     document.getElementById('textInput').className = "show";
     document.getElementById('textbutton').className = "showbutton";
     document.getElementsByClassName('linknote')[0].style.visibility = "hidden";
+    document.getElementsByClassName('flex-container')[0].style.visibility = "hidden";
+    document.getElementsByClassName('maplink')[0].style.visibility = "hidden";
 }
 
 function listnote() {
@@ -89,10 +91,24 @@ function listnote() {
     document.getElementById('textInput').className = "hide";
     document.getElementById('textbutton').className = "hide";
     document.getElementsByClassName('linknote')[0].style.visibility = "hidden";
+    document.getElementsByClassName('flex-container')[0].style.visibility = "hidden";
+
+    document.getElementsByClassName('maplink')[0].style.visibility = "hidden";
 }
 
 function linknote() {
     document.getElementsByClassName('linknote')[0].style.visibility = "visible";
+    document.getElementsByClassName('listmenu')[0].style.visibility = "hidden";
+    document.getElementById('textInput').className = "hide";
+    document.getElementById('textbutton').className = "hide";
+    document.getElementsByClassName('flex-container')[0].style.visibility = "hidden";
+    document.getElementsByClassName('maplink')[0].style.visibility = "hidden";
+}
+
+function maplink() {
+    document.getElementsByClassName('maplink')[0].style.visibility = "visible";
+    document.getElementsByClassName('flex-container')[0].style.visibility = "hidden";
+    document.getElementsByClassName('linknote')[0].style.visibility = "hidden";
     document.getElementsByClassName('listmenu')[0].style.visibility = "hidden";
     document.getElementById('textInput').className = "hide";
     document.getElementById('textbutton').className = "hide";

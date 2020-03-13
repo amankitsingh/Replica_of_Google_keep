@@ -195,16 +195,19 @@ body {
     justify-content: center;
     align-self: center;
     flex-wrap: wrap;
+    position: fixed;
+    top: 50%;
+    left: 20%
   }
 
   .flex-container>div {
     background-color: teal;
     margin: 10px;
     word-wrap: break-word;
-    width: 175px;
+    width: 150px;
     border: 1px solid #000000;
     word-break: keep-all;
-    padding: 40px;
+    padding: 20px;
     font-size: 30px;
     color: black;
   }
@@ -237,6 +240,11 @@ body {
 }
 
 .linknote {
+  display: block;
+  visibility: hidden;
+}
+
+.maplink {
   display: block;
   visibility: hidden;
 }

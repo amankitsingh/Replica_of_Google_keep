@@ -5,9 +5,16 @@
     <meta name="author" content="Ankit Singh">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" type="text/css" href="static/main.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='mapscript.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='hilitor.js') }}"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFP5zJOQZH5GaF995SVzvuDZyXanYDQfk&libraries=places&callback=initAutocomplete"
+        async defer></script>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -25,9 +32,11 @@
             </div>
             <div class="nav-right">
                 <li id="search-icon"><a href="#" onclick="showSearch()"><i class="fas fa-search fa-lg"></i></a></li>
-                <li><a href="#" onClick="window.location.reload();"><i class="fas fa-redo-alt fa-lg"></i></a></li>
+                <li><a href="#" onClick="window.location.reload();"><i class="fas fa-redo-alt fa-lg fa-spin"></i></a>
+                </li>
                 <li><a href="#"><i class="fas fa-bell fa-lg"></i></a></li>
-                <li><a href="#"><i class="fas fa-user fa-lg" style="margin-bottom: 50px;"></i></a></li>
+                <li><a href="{{url_for('logout')}}" style="text-decoration: underline;"><i
+                            class="fas fa-sign-out-alt fa-lg"></i></a></li>
             </div>
         </ul>
     </div>
@@ -41,15 +50,25 @@
         <div class="cards-container">
             <div id="notes" style="margin-left: 150px;">
                 <button onclick="textnote()">Text Note</button>
-                <button onclick="listnote()">List Note</button>
+                <button onclick="listnote()" style="text-decoration: line-through;">List Note</button>
                 <button onclick="linknote()">link note</button>
+                <button onclick="maplink()">Map link</button>
             </div>
         </div>
         <div>
-            <input class="hide" name="textInput" type="text" id="textInput" placeholder="Type your Note">
-            <input type="submit" class="hide" id="textbutton">
+            <input class="hide" name="textInput" type="text" id="textInput" placeholder="Type your Note" style="top: 28%;
+            left: 35%;
+            position: fixed;
+            margin: 40px;">
+            <input type="submit" class="hide" id="textbutton" style="top: 43%;
+            left: 27%;
+            padding: 10px;
+            width: 10%;
+            position: fixed;
+            background: #d9d9d9;
+            color: #555;">
         </div>
-        <div class="listmenu">
+        <div class=" listmenu">
             <div id="myDIV" class="header">
                 <h3>My To Do List</h3>
                 <input type="text" id="myInput" name="listInput" placeholder="Title..." required>
@@ -60,33 +79,129 @@
                 </ul>
             </div>
         </div>
-
         <div class="linknote">
-            <input type="text" id="linktitle" placeholder="Title" required>
-            <input type="url" id="linkInput" placeholder="Type your link" required>
-            <input type="submit" id="linkbutton">
+            <h2 style="top: 24%;
+            left: 35%;
+            position: fixed;">Enter link in /www.xyz.xyz/ format</h2>
+            <input type="text" id="linktitle" placeholder="Title" style="display: block;
+            width: 300px;
+            height: 20px;
+            border: 1px solid green;
+            padding: 4px;
+            top: 28%;
+            left: 35%;
+            position: fixed;
+            margin: 40px;" required>
+            <input type="url" id="linkInput" placeholder="Type your link" style="width: 300px;
+            height: 20px;
+            border: 1px solid orchid;
+            padding: 4px;
+            top: 34%;
+            left: 35%;
+            position: fixed;
+            margin: 40px;" required>
+            <button type=" submit" id="linkbutton" style="top: 46%;
+            left: 38%;
+            padding: 5px;
+            width: 10%;
+            position: fixed;
+            background: #d9d9d9;
+            color: #555;">Submit</button>
         </div>
+        <div class=" maplink" style="top: 1%;">
+            <input type="text" id="maptitle" placeholder="Title of  map search" style="display: block;
+            width: 310px;
+            height: 30px;
+            top: 28%;
+            left: 40%;
+            position: fixed;
+            border: 1px solid green;
+            padding: 4px;" required>
 
-        <div class=" flex-container">
+            <input id="pac-input" class="controls" type="text"
+                placeholder="Type and Press Enter to render the location on map" style="width: 310px;
+            height: 30px;
+            top: 34%;
+            left: 40%;
+            position: fixed;
+            border: 1px solid orchid;
+            padding: 4px;
+            margin-top:4px;" required>
+            <button type=" submit" class="mapsubmit" style="margin-top:5px;top: 41%;
+            left: 40%;
+            padding: 8px;
+            width: 7%;
+            position: fixed;
+            background: #d9d9d9;
+            color: #555;">Submit</button>
+            <div id="result" style="display: block; top: 45%;
+            left: 30%;
+            position: fixed;"></div>
+            <div id="map" style="width: 600px; height: 300px;   border: 1px solid red;
+            top: 99%;
+            left: 30%;
+            position: fixed;
+            margin-top: 35px;"></div>
+        </div>
+        <div class="flex-container">
             {% for text in todo %}
             <div>
-                <b>{{text.text}}</b>
+                <b class="search-item" id="textdisplay">Text: {{text.text}}</b>
+                <div style="margin:5% 0px 0px 40%;">
+                    <a href="{{url_for('deletetextnote', text=text.id)}}"><span class="fas fa-trash fa-xs"></span></a>
+                </div>
             </div>
             {% endfor %}
             {% for text in todolist %}
             <div>
-                <b>{{text.text}}</b>
+                <b class="search-item" id="listdisplay">{{text.text}}</b>
+                <span class="fas fa-trash fa-xs" style="margin-left: 40%;"></span>
             </div>
             {% endfor %}
             {% for text in todolink %}
             <div>
-                <a href='https://{{text.link}}' target="_blank"
-                    style="text-decoration: underline; margin-left: 40px;">{{text.title}}</a></input>
+                <a href='https://{{text.link}}' target="_blank" style="text-decoration: underline; margin-left: 40px;"
+                    id="linkdisplay"><b class="search-item">Link: {{text.title}}</b></a></input>
+                <div style="margin:5% 0px 0px 40%;">
+                    <a href="{{url_for('deletelinknote',link=text.id)}}"><span class="fas fa-trash fa-xs"></span></a>
+                </div>
+            </div>
+            {% endfor %}
+            {% for text in todomap %}
+            <div>
+                <a href="http://google.com/maps/place/{{text.location}}" target="_blank"><b id="mapdisplay"
+                        class="search-item">Map: {{text.title}}</b></a>
+                <a href="{{url_for('deletemapnote', text=text.id)}}"><span class="fas fa-trash fa-xs"></span></a>
             </div>
             {% endfor %}
         </div>
     </div>
     <script>
+        window.addEventListener("DOMContentLoaded", function (e) {
+            var myHilitor2 = new Hilitor("search-item");
+            myHilitor2.setMatchType("left");
+            document.getElementById("search").addEventListener("keyup", function (e) {
+                myHilitor2.apply(this.value);
+            }, false);
+        }, false);
+
+        $("document").ready(function () {
+            $("#textdelete").click(function () {
+                var message = $("#textdisplay").val();
+                console.log(message);
+                $.ajax({
+                    url: "/deletetextnote",
+                    type: "POST",
+                    data: {
+                        'data': message
+                    },
+                    success: function (html) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+
         $("document").ready(function () {
             $("#textbutton").click(function () {
                 var message = $("#textInput").val();
@@ -95,7 +210,7 @@
                     url: "/addtextnote",
                     type: "POST",
                     data: {
-                        'data': message //  to the GET parameters
+                        'data': message
                     },
                     success: function (html) {
                         location.reload();
@@ -108,6 +223,7 @@
             $("#linkbutton").click(function () {
                 var link = $("#linkInput").val();
                 var title = $("#linktitle").val();
+                console.log(link);
                 $.ajax({
                     url: "/addlinknote",
                     type: "POST",
@@ -117,6 +233,39 @@
                     },
                     success: function (html) {
                         location.reload();
+                    }
+                });
+            });
+        });
+
+        $("document").ready(function () {
+            $(".mapsubmit").click(function () {
+                var title = $("#maptitle").val();
+                var location = $('#pac-input').val();
+                console.log(location)
+                var param = {
+                    title: title,
+                    location: location
+                };
+                var ser_param = jQuery.param(param);
+                $.ajax({
+                    url: "/addmapnote",
+                    type: "POST",
+                    data: ser_param,
+                    success: function (result) {
+                        if (result) {
+                            $('#result').html(
+                                '<h5 style="top: 40%;left: 50%; position: fixed;">Location saved ! Redirecting...</h5>'
+                            )
+                            setTimeout(function () {
+                                window.location.href = "/keep";
+                            }, 3000);
+
+                        } else {
+                            $('#result').html(
+                                '<h5 style="top: 40%;left: 50% ; position: fixed;">Failed to make a server-side call for map location.<h5>'
+                            );
+                        }
                     }
                 });
             });
