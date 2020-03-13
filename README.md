@@ -1,5 +1,3 @@
-# Note: Sir, I am really really sorry for submitting this late. I was having my exams so was busy with it and did this project on friday(13 March2020). Please consider this as the token of apologie and consider this assignment. I promise this shall never happen again after i join the firm. I look towards your consideration and kindness.
-
 # Replica of google keep
 
 Python and Flask based application.
@@ -33,5 +31,4 @@ Run: pip install -r requirements.txt // This will install all the requirements o
 ```
 
 # Note: In the map section, type the desire location and press Enter to render the location on * *on-screen* * map and then submit to save it in database.
-In the app the list coloumn is striked because it has issues. Sorry for that.
-Dint had much time to design the UI so kept it very basic.
+In the app the list coloumn is striked because it has issues. 
