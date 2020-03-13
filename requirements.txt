@@ -1,0 +1,10 @@
+Flask==0.12.0
+sqlalchemy==1.2.7
+requests
+oauth2client
+Jinja2==2.8.1
+httplib2
+requests
+json
+functools
+wraps
