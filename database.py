@@ -5,6 +5,8 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+### table for user ###
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -12,6 +14,8 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
     email = Column(String(100), unique=True, nullable=False)
+
+### table for text note ###
 
 
 class todotextlist(Base):
@@ -21,6 +25,8 @@ class todotextlist(Base):
     text = Column(String(250), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User)
+
+### table for list note ###
 
 
 class todolist(Base):
@@ -32,6 +38,8 @@ class todolist(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User)
 
+### table for link note ###
+
 
 class todolinknote(Base):
     __tablename__ = 'todolinknote'
@@ -41,6 +49,8 @@ class todolinknote(Base):
     link = Column(String(250), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User)
+
+### table for map note ###
 
 
 class todomapnote(Base):

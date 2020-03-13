@@ -1,3 +1,4 @@
+# Calling all gods for my help
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import httplib2
@@ -22,7 +23,7 @@ from functools import wraps
 
 app = Flask(__name__)
 
-####### Database#######
+####### Database #######
 engine = create_engine('sqlite:///todo.db',
                        connect_args={'check_same_thread': False})
 
@@ -31,6 +32,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+####### Secret keys for Google sign-in #######
 CLIENT_ID = json.loads(
     open('client_secret.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Replica of Google Keep"
@@ -44,7 +46,7 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-
+# random 32 digit tokenizer
 @app.route('/login')
 def showlogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
@@ -199,6 +201,7 @@ def gdisconnect():
         return response
 
 
+# logout of the application
 @app.route('/logout')
 def logout():
     if 'provider' in login_session:
@@ -233,7 +236,7 @@ def index():
     return render_template('main.html', todo=todotext, todolist=todolists, todolink=todolinks, todomap=todomaplinks)
 
 
-###### Adding items######
+###### Adding note######
 @app.route('/addtextnote', methods=['POST'])
 def addtextnote():
     if 'username' not in login_session:
@@ -245,7 +248,7 @@ def addtextnote():
         session.commit()
     return render_template('main.html')
 
-
+###### Adding note######
 @app.route('/addlistnote', methods=['POST'])
 def addlistnote():
     if 'username' not in login_session:
@@ -258,7 +261,7 @@ def addlistnote():
         session.commit()
     return
 
-
+###### Adding note######
 @app.route('/addlinknote', methods=['POST'])
 def addlinknote():
     if 'username' not in login_session:
@@ -273,7 +276,7 @@ def addlinknote():
         session.commit()
     return render_template('main.html')
 
-
+###### Adding note######
 @app.route('/addmapnote', methods=['POST'])
 def addmapnote():
     if 'username' not in login_session:
@@ -287,7 +290,7 @@ def addmapnote():
         session.commit()
     return redirect('/keep')
 
-
+###### deleting note######
 @app.route('/deletetextnote/<int:text>')
 def deletetextnote(text):
     if 'username' not in login_session:
@@ -298,7 +301,7 @@ def deletetextnote(text):
     session.commit()
     return redirect('/keep')
 
-
+###### deleting note######
 @app.route('/deletemapnote/<int:text>')
 def deletemapnote(text):
     if 'username' not in login_session:
@@ -309,7 +312,7 @@ def deletemapnote(text):
     session.commit()
     return redirect('/keep')
 
-
+###### deleting note######
 @app.route('/deletelinknote/<int:link>')
 def deletelinknote(link):
     if 'username' not in login_session:
@@ -320,7 +323,7 @@ def deletelinknote(link):
     session.commit()
     return redirect('/keep')
 
-
+###### deleting note######
 @app.route('/complete/<int:id>')
 def complete(id):
     if 'username' not in login_session:

@@ -2,7 +2,7 @@ var map;
 var markers = [];
 var polygon = null;
 var placeMarkers = [];
-
+// Setting the Initial view of the map
 function initAutocomplete() {
   var styles = [{
     featureType: 'water',
