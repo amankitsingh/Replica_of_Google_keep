@@ -7,3 +7,4 @@ requests
 json
 functools
 wraps
+mod_wsgi
