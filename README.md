@@ -32,6 +32,6 @@ Run: pip install -r requirements.txt // This will install all the requirements o
 4. Now you are ready explore.
 ```
 
-# Note: In the map section, type the desire location and press Enter to render the location on * *on-screem* * map and then submit to save it in database.
+# Note: In the map section, type the desire location and press Enter to render the location on * *on-screen* * map and then submit to save it in database.
 In the app the list coloumn is striked because it has issues. Sorry for that.
 Dint had much time to design the UI so kept it very basic.
