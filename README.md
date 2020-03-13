@@ -6,7 +6,7 @@ Python and Flask based application.
 ```
 sudo apt-get install python3 // If not present in your pc
 sudo apt-get install python3-pip  // If not present in your pc
-Run: pip install -r requirements.txt // This will install all the requirements of the project listed below:.
+Run: pip install -r requirements.txt // This will install all the requirements of the project listed below:
 
 // The (*) marks are extremely important
 1. Flask==1.0.2*
@@ -15,7 +15,7 @@ Run: pip install -r requirements.txt // This will install all the requirements o
 4. oauth2client*
 5. httplib2
 6. requests*
-7. json
+7. JSON
 8. functools
 9. wraps
 10. mod_wsgi
@@ -26,9 +26,9 @@ Run: pip install -r requirements.txt // This will install all the requirements o
 ```
 1. clone or download the repo into local pc.
 2. Run Python app.py to start the program. //after installing all the requirements
-3. open your webbrowser and visit http://localhost:8000/
-4. Now you are ready explore.
+3. open your web browser and visit http://localhost:8000/
+4. Now you are ready to explore.
 ```
 
-# Note: In the map section, type the desire location and press Enter to render the location on * *on-screen* * map and then submit to save it in database.
-In the app the list coloumn is striked because it has issues. 
+# Note: In the map section, type the desire location and press Enter to render the location on * *on-screen* * map and then submit to save it in the database.
+In the app, the list column is striked because it has issues. 
