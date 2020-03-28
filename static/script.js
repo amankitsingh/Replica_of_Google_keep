@@ -59,6 +59,25 @@ function showSearch() {
     }
 }
 
+function searchnote(elem) {
+    var input, filter, ul, li, a, i, txtValue;
+    filter = elem.toUpperCase();
+    ul = document.getElementsByClassName("search-item");
+    for (i = 0; i < ul.length; i++) {
+        a = ul[i].innerText.toUpperCase();
+        if (a == filter) {
+            k = ul[i].style.color = "yellow";
+        }
+    }
+    if (filter == "") {
+        k = document.getElementsByClassName("search-item");
+        for (i = 0; i < ul.length; i++) {
+            console.log(k[i].innerText);
+            k[i].style.color = "black";
+        }
+    }
+}
+
 function showSideNav() {
     document.getElementsByClassName('side-nav')[0].style.display = "block";
 }

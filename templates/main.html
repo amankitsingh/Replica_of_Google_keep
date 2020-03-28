@@ -10,7 +10,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='mapscript.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='hilitor.js') }}"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFP5zJOQZH5GaF995SVzvuDZyXanYDQfk&libraries=places&callback=initAutocomplete"
         async defer></script>
@@ -26,8 +25,10 @@
                             class="fas fa-bars fa-lg"></i></a></li>
                 <li id="logo"><a href="{{url_for('index')}}" style="font-size: 22px;"><b id="google">Google</b> Keep</a>
                 </li>
-                <li id="search"><input class="search" value="" type="text" placeholder="Search your note"
-                        onblur="this.value='';removeSearch()" onfocus="showSearch()"></input></li>
+                <li id="search"><input class="search" type="text" placeholder="Search your note"
+                        onblur="this.value='';removeSearch()" onfocus="showSearch()"
+                        onkeyup="searchnote(this.value)"></input>
+                </li>
                 <li id="close-search"><a href="#" onclick="clearSearch()"><i class="fas fa-times fa-lg"></i></a></li>
             </div>
             <div class="nav-right">
@@ -160,8 +161,9 @@
             {% endfor %}
             {% for text in todolink %}
             <div>
-                Link: <a href='https://{{text.link}}' target="_blank" style="text-decoration: underline; margin-left: 40px;"
-                    id="linkdisplay"><b class="search-item">{{text.title}}</b></a></input>
+                Link: <a href='https://{{text.link}}' target="_blank"
+                    style="text-decoration: underline; margin-left: 40px;" id="linkdisplay"><b
+                        class="search-item">{{text.title}}</b></a></input>
                 <div style="margin:5% 0px 0px 40%;">
                     <a href="{{url_for('deletelinknote',link=text.id)}}"><span class="fas fa-trash fa-xs"></span></a>
                 </div>
@@ -171,20 +173,13 @@
             <div>
                 Map: <a href="http://google.com/maps/place/{{text.location}}" target="_blank"><b id="mapdisplay"
                         class="search-item">{{text.title}}</b></a>
-                <a href="{{url_for('deletemapnote', text=text.id)}}"><span style="position:fixed;margin-top:55px;" class="fas fa-trash fa-xs"></span></a>
+                <a href="{{url_for('deletemapnote', text=text.id)}}"><span style="position:fixed;margin-top:55px;"
+                        class="fas fa-trash fa-xs"></span></a>
             </div>
             {% endfor %}
         </div>
     </div>
     <script>
-        window.addEventListener("DOMContentLoaded", function (e) {
-            var myHilitor2 = new Hilitor("search-item");
-            myHilitor2.setMatchType("left");
-            document.getElementById("search").addEventListener("keyup", function (e) {
-                myHilitor2.apply(this.value);
-            }, false);
-        }, false);
-
         $("document").ready(function () {
             $("#textdelete").click(function () {
                 var message = $("#textdisplay").val();
