@@ -19,7 +19,9 @@ Replica of Google Keep
 </div>
 
 
-Python and Flask based application.
+
+
+### **Python and Flask based application.**
 
 ## Instructions to follow before Running the project
 ```
