@@ -1,4 +1,19 @@
-# Replica of google keep
+<h1 align="center">
+<br>
+Replica of Google Keep
+</h1>
+
+<p align="center">
+  
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-red.svg" alt="License MIT">
+  </a>
+  
+  <a href="https://github.com/naufalprakoso/Superhero-App/stargazers">
+    <img src="https://img.shields.io/badge/Say%20Thanks-👍-1EAEDB.svg" alt="Say thanks">
+  </a>
+</p>
+
 
 Python and Flask based application.
 
