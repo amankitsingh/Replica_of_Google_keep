@@ -14,7 +14,7 @@ Replica of Google Keep
   </a>
 </p>
 
-<div>
+<div align="center">
 <img src="https://github.com/infinityrun/Replica_of_Google_keep/blob/master/keep.JPG" alt="screenshot"/>
 </div>
 
